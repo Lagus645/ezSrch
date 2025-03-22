@@ -33,22 +33,30 @@ void shellSort(int arr[], int size) {
 }
 
 bool interpolationSearch(int arr[], int st, int end, int size, int k) {
-        int mid = st+((k-arr[st])*(end - st)/arr[end]-arr[st]);
-        while (arr[mid] != k && mid > 1) {
-            mid = st + ((k - arr[st]) * (end - st) / arr[end] - arr[st]);
-            if (mid < k) {
-                st = mid;
-            }
-            else {
-                end = mid;
-            }
-            if (arr[mid] == k) {
-                return true;
-            }
-        }
+    if (st > end || k < arr[st] || k > arr[end]) {
         return false;
-
     }
+
+    while (st <= end && arr[st] != arr[end]) {
+        int mid = st + ((k - arr[st]) * (end - st)) / (arr[end] - arr[st]);
+        if (mid < st || mid > end) {
+            return false;
+        }
+        if (arr[mid] == k) {
+            return true; 
+        }
+        if (arr[mid] < k) {
+            st = mid + 1;
+        }
+        else {
+            end = mid - 1;
+        }
+    }
+    if (arr[st] == k) {
+        return true;
+    }
+    return false; 
+}
 
 int main() {
     setlocale(LC_ALL, "russian");
@@ -59,9 +67,9 @@ int main() {
     for (int i = 0; i < n; i++) {
         m[i] = rand() % 100;
     }
+    shellSort(m, n);
     cout << "Введите искомое число: ";
     cin >> k;
-    shellSort(m, n);
     cout << "Массив данных: ";
     printArray(m, n);
     cout << interpolationSearch(m, st, end, n, k);
