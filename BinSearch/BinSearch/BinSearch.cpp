@@ -34,13 +34,13 @@ void shellSort(int arr[], int size) {
 
 bool BinSearch(int arr[], int st, int end, int size, int k) {
     int mid = ((st+end)/2);
-    while (arr[mid] != k && mid > 1) {
+    while (st <= end) {
         mid = (st + end) / 2;
-        if (((st+end)/2) > k) {
-            st = mid;
+        if (arr[mid] < k) {
+            st = mid+1;
         }
         else {
-            end = mid;
+            end = mid-1;
         }
         if (arr[mid] == k) {
             return true;
@@ -54,7 +54,7 @@ bool BinSearch(int arr[], int st, int end, int size, int k) {
 int main(){
 	setlocale(LC_ALL, "russian");
 	srand(time(0));
-	const int n = 10;
+	const int n = 100;
     int k, st = 0, end = n;
 	int m[n];
 	for (int i = 0; i < n; i++) {

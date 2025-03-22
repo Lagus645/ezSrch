@@ -36,7 +36,7 @@ bool interpolationSearch(int arr[], int st, int end, int size, int k) {
         int mid = st+((k-arr[st])*(end - st)/arr[end]-arr[st]);
         while (arr[mid] != k && mid > 1) {
             mid = st + ((k - arr[st]) * (end - st) / arr[end] - arr[st]);
-            if (mid > k) {
+            if (mid < k) {
                 st = mid;
             }
             else {
